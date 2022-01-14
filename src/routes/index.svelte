@@ -10,6 +10,9 @@
 	};
 
 	getDogs();
+	// TODO: data to send to server: cuterThanArlo?, url, date
+	// build stats page
+	// adjust width according to tallest image
 </script>
 
 <svelte:head>
@@ -32,19 +35,18 @@
 		text-align: center;
 		margin: 5% 10%;
 	}
-	.arlo {
-		width: 100%;
+	img {
+		width: 80%;
 		height: auto;
+		align-self: center;
 	}
-	.dog {
-		width: 100%;
-		height: auto;
-	}
+
 	.imgs {
 		border: 1px solid red;
-		justify-content: center;
+
+		/* justify-content: space-between; */
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: auto auto;
 		gap: 5%;
 	}
 	/* .hidden {
