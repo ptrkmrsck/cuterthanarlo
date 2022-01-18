@@ -1,12 +1,16 @@
 <script>
-	let src;
-	let arlo;
+	export let src;
+	export let arlo;
 
 	let getDogs = async () => {
 		let response = await fetch('https://dog.ceo/api/breeds/image/random');
 		let data = await response.json();
-		src = await data.message;
-		arlo = `../static/arlopix/${Math.floor(Math.random() * 10) + 1}.jpg`;
+		setDogs(data);
+	};
+
+	let setDogs = (notArlo) => {
+		src = notArlo.message;
+		arlo = `/arlopix/${Math.floor(Math.random() * 10) + 1}.jpg`;
 	};
 
 	getDogs();
@@ -36,8 +40,10 @@
 		margin: 5% 10%;
 	}
 	img {
-		width: 80%;
+		width: auto;
 		height: auto;
+		max-height: 350px;
+		max-width: 400px;
 		align-self: center;
 	}
 
@@ -48,10 +54,8 @@
 		display: grid;
 		grid-template-columns: auto auto;
 		gap: 5%;
+		justify-content: space-evenly;
 	}
-	/* .hidden {
-		opacity: 0%;
-	} */
 
 	@media (max-width: 500px) {
 		main {
