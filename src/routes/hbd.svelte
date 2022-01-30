@@ -35,7 +35,7 @@
 			/>
 		{/each}
 		{#each notCuters as { other_dog_url }}
-			<img style:animation-duration={`${Math.random() * 2.5 + 1}s`} ~src={other_dog_url} alt="" />
+			<img style:animation-duration={`${Math.random() * 2.5 + 1}s`} src={other_dog_url} alt="" />
 		{/each}
 	</div>
 </main>
