@@ -11,7 +11,9 @@
 <script>
 	import { loading } from '$lib/loading';
 	export let arlocuterthan;
+
 	$loading = true;
+
 	let total = arlocuterthan.length;
 	let howManyCuter = arlocuterthan.filter((x) => x.yesno == false).length;
 	let cuters = arlocuterthan.filter((x) => x.yesno == true);

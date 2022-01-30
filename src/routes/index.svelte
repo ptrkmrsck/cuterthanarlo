@@ -1,5 +1,4 @@
 <script>
-	import { createClient } from '@supabase/supabase-js';
 	import { loading } from '$lib/loading';
 	import supabase from '$lib/supabase';
 
