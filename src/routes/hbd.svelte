@@ -28,10 +28,14 @@
 	<br />
 	<div>
 		{#each arloArr as i}
-			<img src={`/arlopix/${i}.jpg`} alt="" />
+			<img
+				style:animation-duration={`${Math.random() * 2.5 + 1}s`}
+				src={`/arlopix/${i}.jpg`}
+				alt=""
+			/>
 		{/each}
 		{#each notCuters as { other_dog_url }}
-			<img src={other_dog_url} alt="" />
+			<img style:animation-duration={`${Math.random() * 2.5 + 1}s`} ~src={other_dog_url} alt="" />
 		{/each}
 	</div>
 </main>
@@ -53,7 +57,7 @@
 		box-shadow: 5px 5px aqua;
 		max-width: 150px;
 		animation-name: spinning;
-		animation-duration: 3.5s;
+		/* animation-duration: 3.5s; */
 		animation-iteration-count: infinite;
 		animation-timing-function: linear;
 	}
