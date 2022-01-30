@@ -54,10 +54,11 @@
 <style>
 	main {
 		text-align: center;
-		margin: 5% 10%;
+		margin: 2% 10%;
 	}
 	h1 {
 		font-size: 3rem;
+		margin: 0 0 2% 0;
 	}
 	h3 {
 		font-size: 2rem;
@@ -65,9 +66,8 @@
 	}
 	img {
 		width: auto;
-		height: 100%;
+		height: 40vh;
 		max-width: 100%;
-		align-self: center;
 		object-fit: contain;
 		margin-bottom: 3px;
 	}
@@ -79,7 +79,7 @@
 		/* justify-content: space-between; */
 		display: flex;
 		justify-content: center;
-		height: 50vh;
+		height: 40vh;
 		gap: 3vw;
 	}
 	nav {
