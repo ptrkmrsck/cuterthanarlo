@@ -1,13 +1,14 @@
 <script>
 	import { createClient } from '@supabase/supabase-js';
+	import { loading } from '$lib/loading';
+	import supabase from '$lib/supabase';
+
 	let src;
 	let arlo;
-
-	const supabaseUrl = 'https://dakzdewepryxwvgbrmpn.supabase.co';
-	const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
-	const supabase = createClient(supabaseUrl, supabaseKey);
+	let active = true;
 
 	let getDogs = async () => {
+		$loading = true;
 		let response = await fetch('https://dog.ceo/api/breeds/image/random');
 		let data = await response.json();
 		setDogs(data);
@@ -15,10 +16,9 @@
 
 	let setDogs = (notArlo) => {
 		src = notArlo.message;
-		arlo = rdmArlo;
+		arlo = `/arlopix/${Math.floor(Math.random() * 10) + 1}.jpg`;
+		let delay = setTimeout(() => ($loading = false), 1000);
 	};
-
-	let rdmArlo = `/arlopix/${Math.floor(Math.random() * 10) + 1}.jpg`;
 
 	let updateDatabase = async (e) => {
 		const { data, error } = await supabase
@@ -28,15 +28,23 @@
 	};
 
 	getDogs();
-	// TODO: adjust width according to tallest image
-	// Make loading animation
 </script>
 
 <main>
 	<h1>cuter than arlo?</h1>
-	<div class="imgs">
-		<img class="arlo" src={arlo} alt="pix of arlo" />
-		<img class="dog" {src} alt="incoming other dog :)" />
+	<div class="imgs" class:loading={$loading}>
+		<button class:active={!active} on:click={() => (active = true)} class="left-right left"
+			>◀</button
+		>
+		<figure class:active>
+			<img class="dog" {src} alt="incoming other dog :)" />
+			<figcaption>(not arlo)</figcaption>
+		</figure>
+		<figure class:active={!active}>
+			<img class="arlo" src={arlo} alt="pix of arlo" />
+			<figcaption>(arlo)</figcaption>
+		</figure>
+		<button class:active on:click={() => (active = false)} class="left-right right">▶</button>
 	</div>
 	<h3>is this dog cuter than arlo?</h3>
 	<button data-yesno="true" on:click={updateDatabase}>yes</button>
@@ -46,7 +54,6 @@
 
 <style>
 	main {
-		align-items: center;
 		text-align: center;
 		margin: 5% 10%;
 	}
@@ -55,23 +62,26 @@
 	}
 	h3 {
 		font-size: 2rem;
+		margin-top: 60px;
 	}
 	img {
 		width: auto;
-		height: auto;
-		max-height: 350px;
-		max-width: 400px;
+		height: 100%;
+		max-width: 100%;
 		align-self: center;
-		border: 1px solid hotpink;
-		box-shadow: 5px 5px aqua;
+		object-fit: contain;
+		margin-bottom: 3px;
 	}
-
+	figure {
+		margin: 0;
+		padding: 0;
+	}
 	.imgs {
 		/* justify-content: space-between; */
-		display: grid;
-		grid-template-columns: auto auto;
-		gap: 5%;
-		justify-content: space-evenly;
+		display: flex;
+		justify-content: center;
+		height: 50vh;
+		gap: 3vw;
 	}
 	nav {
 		margin-top: 40px;
@@ -84,11 +94,11 @@
 		border: 1px solid black;
 		box-shadow: 4px 4px black;
 		padding: 5px 10px 8px 10px;
-		text-shadow: 1px 1px hotpink;
 	}
 	button:hover {
 		background-color: aqua;
 		box-shadow: 4px 4px hotpink;
+		text-shadow: 1px 1px hotpink;
 		cursor: pointer;
 	}
 	a {
@@ -103,9 +113,62 @@
 		text-shadow: 0.5px 0.5px hotpink;
 		box-shadow: 4px 4px hotpink;
 	}
-	@media (max-width: 500px) {
+	.left-right {
+		display: none;
+	}
+	.loading {
+		opacity: 0;
+	}
+	@media (max-width: 650px) {
 		main {
 			margin: 5%;
+		}
+		button {
+			font-size: 1.9rem;
+		}
+		h1 {
+			font-size: 2.2rem;
+		}
+		h3 {
+			font-size: 1.5rem;
+		}
+		a {
+			font-size: 1.2rem;
+		}
+
+		.imgs {
+			position: relative;
+			height: 50vh;
+			width: 90%;
+			margin: 0 auto;
+		}
+		figure {
+			display: none;
+		}
+		.left-right {
+			color: white;
+			font-size: 1.2rem;
+			position: absolute;
+			top: 50%;
+			height: 120px;
+			transform: translateY(-50%);
+			background-color: aqua;
+			box-shadow: 4px 4px hotpink;
+			text-shadow: 1.5px 1.5px hotpink;
+			cursor: pointer;
+			border-radius: 0;
+			border: none;
+			display: inherit;
+			display: none;
+		}
+		.active {
+			display: initial;
+		}
+		.left {
+			left: -43px;
+		}
+		.right {
+			right: -40px;
 		}
 	}
 </style>
