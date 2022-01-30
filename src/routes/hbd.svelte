@@ -17,7 +17,7 @@
 	let total = arlocuterthan.length;
 	let notCuters = arlocuterthan.filter((x) => x.yesno == false);
 
-	let delay = () => setTimeout(() => ($loading = false), 1000);
+	let delay = () => setTimeout(() => ($loading = false), 2000);
 	delay();
 
 	let arloArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -43,12 +43,11 @@
 <style>
 	main {
 		margin: 10%;
-		gap: 30px;
 		text-align: center;
 	}
 	div {
 		display: grid;
-		grid-template-columns: repeat(5, auto);
+		grid-template-columns: repeat(5, 1fr);
 	}
 
 	img {
@@ -68,17 +67,25 @@
 
 	@keyframes spinning {
 		from {
-			transform: rotate(0deg);
+			transform: rotate3d(0);
 		}
 		to {
-			transform: rotate(360deg);
+			transform: rotate3d(1, 1, 1, 360deg);
 		}
 	}
 
 	@media (max-width: 650px) {
 		main {
-			margin: 15% 3%;
-			gap: 10px;
+			margin: 15% 2%;
+		}
+		div {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 1vw;
+			width: 100vw;
+		}
+		img {
+			width: 33vw;
 		}
 	}
 </style>
