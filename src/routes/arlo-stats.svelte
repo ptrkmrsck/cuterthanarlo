@@ -25,7 +25,7 @@
 <main>
 	<a href="./">home</a>
 	<h1>arlo is cuter than at least {howManyCuter} out of {total} dougs</h1>
-	<p>giving him a {(howManyCuter / total) * 100}% cuteness rating</p>
+	<p>giving him a {Math.floor((howManyCuter / total) * 100)}% cuteness rating</p>
 
 	<h3>
 		↓the {cuters.length} doug{cuters.length < 2 ? '' : 's'} that {cuters.length < 2 ? 'is' : 'are'} "cuter"

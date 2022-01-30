@@ -1,0 +1,1 @@
+import{U as s}from"./vendor-36c099ed.js";const i=s("https://dakzdewepryxwvgbrmpn.supabase.co","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJvbGUiOiJhbm9uIiwiaWF0IjoxNjQyMzA0OTcwLCJleHAiOjE5NTc4ODA5NzB9.5QT9JVfYdQyn4J9FXsKGKWMtX3gHkQzrdzOYlsTUrP0");export{i as s};
