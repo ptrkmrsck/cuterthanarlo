@@ -15,8 +15,13 @@
 
 	let setDogs = (notArlo) => {
 		src = notArlo.message;
-		arlo = `/arlopix/${Math.floor(Math.random() * 10) + 1}.jpg`;
+		setArlo();
 		let delay = setTimeout(() => ($loading = false), 1000);
+	};
+
+	let setArlo = () => {
+		let newArlo = `/arlopix/${Math.floor(Math.random() * 10) + 1}.jpg`;
+		newArlo !== arlo ? (arlo = newArlo) : setArlo();
 	};
 
 	let updateDatabase = async (e) => {
@@ -33,17 +38,25 @@
 	<h1>cuter than arlo?</h1>
 	<div class="imgs" class:loading={$loading}>
 		<button class:active={!active} on:click={() => (active = true)} class="left-right left"
-			>◀</button
+			>&lt;</button
 		>
+		<!-- button alternatives:  ◀ ▶ -->
 		<figure class:active>
 			<img class="dog" {src} alt="incoming other dog :)" />
 			<figcaption>(not arlo)</figcaption>
 		</figure>
 		<figure class:active={!active}>
-			<img class="arlo" src={arlo} alt="pix of arlo" />
+			<img
+				class="arlo"
+				src={arlo}
+				alt="pix of arlo"
+				style:cursor="pointer"
+				on:click={setArlo}
+				title="click for more arlo"
+			/>
 			<figcaption>(arlo)</figcaption>
 		</figure>
-		<button class:active on:click={() => (active = false)} class="left-right right">▶</button>
+		<button class:active on:click={() => (active = false)} class="left-right right">&gt;</button>
 	</div>
 	<h3>is this dog cuter than arlo?</h3>
 	<button data-yesno="true" on:click={updateDatabase}>yes</button>
@@ -94,11 +107,19 @@
 		box-shadow: 4px 4px black;
 		padding: 5px 10px 8px 10px;
 	}
-	button:hover {
-		background-color: aqua;
-		box-shadow: 4px 4px hotpink;
-		text-shadow: 1px 1px hotpink;
-		cursor: pointer;
+	@media (hover: hover) {
+		button:hover {
+			background-color: aqua;
+			box-shadow: 4px 4px hotpink;
+			text-shadow: 1px 1px hotpink;
+			cursor: pointer;
+		}
+		a:hover {
+			border: 1px solid black;
+			background-color: aqua;
+			text-shadow: 0.5px 0.5px hotpink;
+			box-shadow: 4px 4px hotpink;
+		}
 	}
 	a {
 		padding: 5px 10px 8px 10px;
@@ -106,12 +127,7 @@
 		text-decoration: underline;
 		color: black;
 	}
-	a:hover {
-		border: 1px solid black;
-		background-color: aqua;
-		text-shadow: 0.5px 0.5px hotpink;
-		box-shadow: 4px 4px hotpink;
-	}
+
 	.left-right {
 		display: none;
 	}
@@ -146,14 +162,14 @@
 		}
 		.left-right {
 			color: white;
-			font-size: 1.2rem;
+			font-size: 2rem;
 			position: absolute;
 			top: 50%;
 			height: 120px;
 			transform: translateY(-50%);
 			background-color: aqua;
 			box-shadow: 4px 4px hotpink;
-			text-shadow: 1.5px 1.5px hotpink;
+			text-shadow: 1px 2px hotpink;
 			cursor: pointer;
 			border-radius: 0;
 			border: none;
@@ -168,6 +184,18 @@
 		}
 		.right {
 			right: -40px;
+		}
+		button:active {
+			background-color: aqua;
+			box-shadow: 4px 4px hotpink;
+			text-shadow: 1px 1px hotpink;
+			cursor: pointer;
+		}
+		a:active {
+			border: 1px solid black;
+			background-color: aqua;
+			text-shadow: 0.5px 0.5px hotpink;
+			box-shadow: 4px 4px hotpink;
 		}
 	}
 </style>
