@@ -101,6 +101,7 @@
 	button {
 		font-family: syne;
 		background-color: white;
+		color: black;
 		margin: 0px 10px;
 		font-size: 3rem;
 		border: 1px solid black;
