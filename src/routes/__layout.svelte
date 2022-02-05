@@ -7,6 +7,7 @@
 
 <svelte:head>
 	<title>cuter than arlo?</title>
+	<meta property="og:image" content="/arlopix/8.jpg/" />
 </svelte:head>
 <ArloSpin />
 <slot />
