@@ -146,6 +146,7 @@
 			font-size: 2.2rem;
 		}
 		h3 {
+			margin-top: 1rem;
 			font-size: 1.5rem;
 		}
 		a {
