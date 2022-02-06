@@ -16,7 +16,7 @@
 
 	let total = arlocuterthan.length;
 	let howManyCuter = arlocuterthan.filter((x) => x.yesno == false).length;
-	let cuters = arlocuterthan.filter((x) => x.yesno == true);
+	let cuters = arlocuterthan.filter((x) => x.yesno == true).reverse();
 
 	let delay = () => setTimeout(() => ($loading = false), 1000);
 	delay();
@@ -26,7 +26,10 @@
 	<a href="./">home</a>
 	<h1>arlo is cuter than at least {howManyCuter} out of {total} dougs</h1>
 	{#if cuters.length}
-		<p>giving him a {Math.floor((howManyCuter / total) * 100)}% cuteness rating</p>
+		<h2>
+			giving him a <span class="percent">{Math.floor((howManyCuter / total) * 100)}%</span> cuteness
+			rating
+		</h2>
 		<h3>
 			↓the {cuters.length} doug{cuters.length < 2 ? '' : 's'} that {cuters.length < 2
 				? 'is'
@@ -34,10 +37,10 @@
 		</h3>
 	{/if}
 	{#if cuters.length < 1}
-		<h1 style:margin="30vh">NONE DOUGS ARE CUTER THAN ARLO !!!</h1>
+		<h3 style:margin="30vh">NONE DOUGS ARE CUTER THAN ARLO !!!</h3>
 	{:else}
 		{#each cuters as { other_dog_url }}
-			<img class:loading={$loading} src={other_dog_url} alt="" />
+			<img class:loading={$loading} src={other_dog_url} alt="random dog" loading="lazy" />
 		{/each}
 	{/if}
 </main>
@@ -46,7 +49,7 @@
 	main {
 		justify-content: center;
 		text-align: center;
-		margin: 5%;
+		margin: 7% 5%;
 		gap: 30px;
 	}
 
@@ -73,6 +76,15 @@
 		background-color: aqua;
 		text-shadow: 0.5px 0.5px hotpink;
 		box-shadow: 4px 4px hotpink;
+	}
+	.percent {
+		padding: 3px 5px;
+		color: hotpink;
+		border: 1px solid black;
+		background-color: aqua;
+		text-shadow: 0.5px 0.5px black;
+		box-shadow: 3px 3px hotpink;
+		line-height: 50px;
 	}
 	.loading {
 		opacity: 0;
