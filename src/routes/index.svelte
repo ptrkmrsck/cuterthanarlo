@@ -8,9 +8,13 @@
 
 	let getDogs = async () => {
 		$loading = true;
-		let response = await fetch('https://dog.ceo/api/breeds/image/random');
-		let data = await response.json();
-		setDogs(data);
+		try {
+			let response = await fetch('https://dog.ceo/api/breeds/image/random');
+			let data = await response.json();
+			setDogs(data);
+		} catch (e) {
+			console.error(e);
+		}
 	};
 
 	let setDogs = (notArlo) => {
