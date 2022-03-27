@@ -11,15 +11,28 @@
 <script>
 	import { loading } from '$lib/loading';
 	export let arlocuterthan;
+	let topToggle = false;
 
 	$loading = true;
 
 	let total = arlocuterthan.length;
 	let howManyCuter = arlocuterthan.filter((x) => x.yesno == false).length;
 	let cuters = arlocuterthan.filter((x) => x.yesno == true).reverse();
-
 	let delay = () => setTimeout(() => ($loading = false), 1000);
 	delay();
+
+	//aggregate duplicates
+	let reducedList = (arr) => {
+		return arr.reduce((m, e) => {
+			m[e.other_dog_url] = (+m[e.other_dog_url] || 0) + 1;
+			return m;
+		}, {});
+	};
+
+	// decending sort
+	let sorted = Object.entries(reducedList(cuters))
+		.filter((x) => x[1] > 1)
+		.sort(([, a], [, b]) => b - a);
 </script>
 
 <main>
@@ -30,17 +43,34 @@
 			giving him a <span class="percent">{Math.floor((howManyCuter / total) * 100)}%</span> cuteness
 			rating
 		</h2>
-		<h3>
-			↓the {cuters.length} doug{cuters.length < 2 ? '' : 's'} that {cuters.length < 2
-				? 'is'
-				: 'are'} "cuter" than arlo↓
-		</h3>
+		{#if topToggle}
+			<h3>
+				↓the {sorted.length} dougs that have been voted cuter than arlo more than once↓
+			</h3>
+		{:else}
+			<h3>
+				↓the {cuters.length} doug{cuters.length < 2 ? '' : 's'} that {cuters.length < 2
+					? 'is'
+					: 'are'} "cuter" than arlo↓
+			</h3>
+		{/if}
+		<div class="buttons">
+			<button class:topToggle on:click={() => (topToggle = false)}>all</button>
+			<button class:topToggle={!topToggle} on:click={() => (topToggle = true)}>top</button>
+		</div>
 	{/if}
 	{#if cuters.length < 1}
 		<h3 style:margin="30vh">NONE DOUGS ARE CUTER THAN ARLO !!!</h3>
-	{:else}
+	{:else if !topToggle}
 		{#each cuters as { other_dog_url }}
 			<img class:loading={$loading} src={other_dog_url} alt="random dog" loading="lazy" />
+		{/each}
+	{:else}
+		{#each sorted as x}
+			<figure class:loading={$loading}>
+				<img src={x[0]} alt="random dog" loading="lazy" />
+				<figcaption>voted cuter *{x[1]} times*!</figcaption>
+			</figure>
 		{/each}
 	{/if}
 </main>
@@ -59,6 +89,17 @@
 		box-shadow: 5px 5px aqua;
 		max-width: 33vw;
 		max-height: 33vh;
+	}
+	figure img {
+		margin: 0;
+		margin-bottom: 0.3em;
+		width: 50%;
+		max-width: 50%;
+		max-height: none;
+	}
+	figcaption {
+		/* margin-top: 0.3em; */
+		margin-bottom: 2em;
 	}
 	a {
 		position: fixed;
@@ -89,10 +130,39 @@
 	.loading {
 		opacity: 0;
 	}
+
+	button {
+		font-family: inherit;
+		font-size: inherit;
+		background-color: white;
+		border-radius: 0;
+		background-color: white;
+		border: 1px solid black;
+		cursor: pointer;
+	}
+
+	.buttons {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.7%;
+		margin-bottom: 1em;
+	}
+
+	.topToggle {
+		color: white;
+		background-color: black;
+		transform: scale(82%);
+	}
 	@media (max-width: 650px) {
 		main {
 			margin: 15% 3%;
 			gap: 10px;
+		}
+		figure img {
+			width: 90%;
+			max-width: 90%;
+			max-height: none;
 		}
 	}
 </style>
