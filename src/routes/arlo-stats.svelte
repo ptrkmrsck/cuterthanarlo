@@ -139,7 +139,7 @@
 		color: black;
 		background-color: white;
 		border: 1px solid black;
-		transform: scale(120%);
+		transform: scale(125%);
 	}
 
 	.buttons {
