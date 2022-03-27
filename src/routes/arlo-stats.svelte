@@ -139,13 +139,14 @@
 		color: black;
 		background-color: white;
 		border: 1px solid black;
+		transform: scale(120%);
 	}
 
 	.buttons {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: 0.7%;
+		gap: 3%;
 		margin-bottom: 1em;
 	}
 
@@ -153,7 +154,7 @@
 		color: white;
 		background-color: black;
 		cursor: pointer;
-		transform: scale(82%);
+		transform: scale(100%);
 	}
 	@media (max-width: 650px) {
 		main {
