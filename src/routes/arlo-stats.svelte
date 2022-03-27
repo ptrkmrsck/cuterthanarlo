@@ -69,7 +69,7 @@
 		{#each sorted as x}
 			<figure class:loading={$loading}>
 				<img src={x[0]} alt="random dog" loading="lazy" />
-				<figcaption>voted cuter *{x[1]} times*!</figcaption>
+				<figcaption>voted cuter *{x[1]} times!*</figcaption>
 			</figure>
 		{/each}
 	{/if}
@@ -133,12 +133,12 @@
 
 	button {
 		font-family: inherit;
-		font-size: inherit;
-		background-color: white;
+		font-size: 1.2rem;
 		border-radius: 0;
+		padding: 1px 6px;
+		color: black;
 		background-color: white;
 		border: 1px solid black;
-		cursor: pointer;
 	}
 
 	.buttons {
@@ -152,6 +152,7 @@
 	.topToggle {
 		color: white;
 		background-color: black;
+		cursor: pointer;
 		transform: scale(82%);
 	}
 	@media (max-width: 650px) {
